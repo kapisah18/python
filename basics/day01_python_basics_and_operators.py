@@ -1,136 +1,184 @@
-# day 1 -------- python basics 
+"""
+========================================
+DAY 1 — PYTHON BASICS & OPERATORS
+========================================
+
+This file explains:
+- Variables & keywords
+- Data types
+- Input & casting
+- Arithmetic, comparison, bitwise operators
+
+Read comments carefully — they explain WHAT and WHY.
+"""
+
+# -------------------------------------
+# 1. OUTPUT FUNCTION
+# -------------------------------------
+
+# print() → built-in function to display output on screen
 print("Hello Arsh")
-name = "Arsh"
-age = 26
-height = 5.9
-is_student = True
 
-print("Name: ", name)
-print("Age: ", age)
-print("Height: ", height)
-print("Student: ", is_student)
 
-#Data Types 
-print(type(name))
-print(type(age))
-print(type(height))
-print(type(is_student))
+# -------------------------------------
+# 2. VARIABLES & ASSIGNMENT
+# -------------------------------------
 
-#taking input
-username = input("Enter Your Name:  ")
+# =  → assignment operator (stores value in variable)
+
+name = "Arsh"        # str  → text
+age = 26             # int  → whole number
+height = 5.9         # float → decimal number
+is_student = True    # bool → True / False
+
+print("Name:", name)
+print("Age:", age)
+print("Height:", height)
+print("Student:", is_student)
+
+
+# -------------------------------------
+# 3. DATA TYPES
+# -------------------------------------
+
+# type() → tells the data type of a variable
+print(type(name))        # <class 'str'>
+print(type(age))         # <class 'int'>
+print(type(height))      # <class 'float'>
+print(type(is_student))  # <class 'bool'>
+
+
+# -------------------------------------
+# 4. USER INPUT & TYPE CASTING
+# -------------------------------------
+
+# input() → takes input from user
+# ALWAYS returns string (str)
+
+username = input("Enter your name: ")
 print("Welcome", username)
 
-yourage = int(input("Enter Your Age: "))
-print("Your Age is: ", yourage)
+# int() → type casting (string → integer)
+user_age = int(input("Enter your age: "))
+print("Your age is:", user_age)
 
-#Simple Math
+
+# -------------------------------------
+# 5. BASIC ARITHMETIC OPERATORS
+# -------------------------------------
 
 x = 10
 y = 3
 
-print("Sum = ", x+y)
-print("Difference = ", x-y)
-print("Product = ",x*y)
-print("Division = ",x/y)
-# =========================
-# Day 1 – Python Operators
-# =========================
+# +  → addition
+print("Sum =", x + y)
 
-# --- Basic arithmetic operators ---
+# -  → subtraction
+print("Difference =", x - y)
+
+# *  → multiplication
+print("Product =", x * y)
+
+# /  → division (always returns float in Python 3)
+print("Division =", x / y)
+
+
+# -------------------------------------
+# 6. ARITHMETIC WITH USER INPUT
+# -------------------------------------
+
 num1 = int(input("Enter first number: "))
 num2 = int(input("Enter second number: "))
 
-# Addition: adds two numbers
-print("Sum =", num1 + num2)
+print("Addition (+) =", num1 + num2)
+print("Subtraction (-) =", num1 - num2)
+print("Multiplication (*) =", num1 * num2)
+print("Division (/) =", num1 / num2)
 
-# Subtraction: subtracts second from first
-print("Difference =", num1 - num2)
+# // → floor division (drops decimal)
+print("Floor Division (//) =", num1 // num2)
 
-# Multiplication: multiplies numbers
-print("Product =", num1 * num2)
+# % → modulus (remainder after division)
+print("Modulus (%) =", num1 % num2)
 
-# Division: always returns float
-print("Division =", num1 / num2)
+# ** → exponent (power)
+print("Exponentiation (**) =", num1 ** num2)
 
-# Floor division: quotient without decimal part
-print("Integer Division =", num1 // num2)
-
-# Modulus: remainder after division
-print("Modulus =", num1 % num2)
-
-# Exponentiation: power (num1 raised to num2)
-print("Exponentiation =", num1 ** num2)
-
-# Average of two numbers
 print("Average =", (num1 + num2) / 2)
 
-# --- Built-in math helper functions ---
 
-# Maximum of two numbers
+# -------------------------------------
+# 7. BUILT-IN MATH FUNCTIONS
+# -------------------------------------
+
+# max() → returns larger value
 print("Max =", max(num1, num2))
 
-# Minimum of two numbers
+# min() → returns smaller value
 print("Min =", min(num1, num2))
 
-# Absolute value (removes negative sign)
+# abs() → absolute value (removes negative sign)
 print("Absolute num1 =", abs(num1))
-print("Absolute num2 =", abs(num2))
 
-# Rounding (mostly useful for floats)
+# round() → rounds number
 print("Rounded num1 =", round(num1))
-print("Rounded num2 =", round(num2))
 
-# Power using function (same as **)
-print("Power using pow =", pow(num1, num2))
+# pow(a, b) → a raised to power b
+print("Power using pow() =", pow(num1, num2))
 
-# Square root using exponent
+# ** 0.5 → square root trick
 print("Square root num1 =", num1 ** 0.5)
-print("Square root num2 =", num2 ** 0.5)
 
-# Divmod: returns (quotient, remainder)
+# divmod(a, b) → returns (quotient, remainder)
 print("Divmod result =", divmod(num1, num2))
 
 
-# --- Comparison operators (VERY important for logic & security) ---
+# -------------------------------------
+# 8. COMPARISON OPERATORS
+# (Return Boolean: True / False)
+# -------------------------------------
 
-# Greater than
-print("num1 > num2 :", num1 > num2)
-
-# Less than
-print("num1 < num2 :", num1 < num2)
-
-# Equal to
+# == → equal to
 print("num1 == num2 :", num1 == num2)
 
-# Not equal to
+# != → not equal to
 print("num1 != num2 :", num1 != num2)
 
-# Greater than or equal
+# >  → greater than
+print("num1 > num2 :", num1 > num2)
+
+# <  → less than
+print("num1 < num2 :", num1 < num2)
+
+# >= → greater than or equal to
 print("num1 >= num2 :", num1 >= num2)
 
-# Less than or equal
+# <= → less than or equal to
 print("num1 <= num2 :", num1 <= num2)
 
 
-# --- Bitwise operators (intro level – low-level logic) ---
+# -------------------------------------
+# 9. BITWISE OPERATORS (LOW-LEVEL LOGIC)
+# -------------------------------------
+# Mostly used in flags, permissions, networking, security
 
-# AND: compares bits (1 & 1 = 1, else 0)
-print("Bitwise AND =", num1 & num2)
+# & → AND (both bits must be 1)
+print("Bitwise AND (&) =", num1 & num2)
 
-# OR: if either bit is 1
-print("Bitwise OR =", num1 | num2)
+# | → OR (any bit is 1)
+print("Bitwise OR (|) =", num1 | num2)
 
-# XOR: 1 if bits are different
-print("Bitwise XOR =", num1 ^ num2)
+# ^ → XOR (bits must be different)
+print("Bitwise XOR (^) =", num1 ^ num2)
 
-# NOT: flips all bits (two’s complement)
-print("Bitwise NOT num1 =", ~num1)
-print("Bitwise NOT num2 =", ~num2)
+# ~ → NOT (bit inversion)
+print("Bitwise NOT (~) num1 =", ~num1)
 
-# Left shift: multiply by 2^n
-print("Left Shift num1 by 1 =", num1 << 1)
+# << → left shift (multiply by 2^n)
+print("Left Shift (<<) num1 =", num1 << 1)
 
-# Right shift: divide by 2^n
-print("Right Shift num1 by 1 =", num1 >> 1)
+# >> → right shift (divide by 2^n)
+print("Right Shift (>>) num1 =", num1 >> 1)
 
-print("End of Day 1 – Operator Introduction")
+
+print("\nEnd of Day 1 — Python Basics & Operators")
