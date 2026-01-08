@@ -1,152 +1,206 @@
 # =====================================================
-# Day 9 — Modules & Imports
+# Day 09 — Modules & Imports (Clean + Structured)
 # =====================================================
-# This is a LEARNING + PRACTICE file.
-# It demonstrates concepts AND implements given tasks.
-# Real tools will later split this into multiple files.
+# Goal:
+# Learn how Python uses modules to organize real programs,
+# reuse code, and access built-in tools safely.
 # =====================================================
 
 
-# -----------------------------------------------------
-# Phase 0 — Mental Model
-# -----------------------------------------------------
-# module  → one .py file
-# import  → loading that file into another file
-# Real tools are multi-file
-# Bad imports cause crashes & side effects
+# =====================================================
+# TOPIC 1: What is a Module?
+# =====================================================
+# Definition:
+# A module is a Python file (.py) that contains reusable code
+# such as functions, variables, or classes.
+#
+# Real-time examples:
+# - auth.py      → login logic
+# - scanner.py   → port scanning logic
+# - utils.py     → helper functions
+#
+# Why it matters:
+# - Large programs are split into files
+# - Reuse code without copy-paste
+# - Cleaner and safer structure
+# =====================================================
 
 
-# -----------------------------------------------------
-# Phase 1 — Built-in Modules
-# -----------------------------------------------------
+# =====================================================
+# TOPIC 2: Importing a Custom Module (Same Folder)
+# =====================================================
+# Assume this file exists in the SAME directory:
+#
+# my_module.py
+# -----------------------------
+# test = "Test String"
+#
+# def find_index(sequence, target):
+#     """Return index of target or -1 if not found"""
+#     for i, value in enumerate(sequence):
+#         if value == target:
+#             return i
+#     return -1
+# -----------------------------
 
+import my_module
+# IMPORTANT:
+# - Python runs ALL top-level code in my_module ONCE
+# - Functions/variables become available after import
+
+courses = ["History", "Math", "Physics", "CompSci"]
+
+index = my_module.find_index(courses, "Math")
+print(index)   # Output: 1
+
+
+# =====================================================
+# TOPIC 3: import as (Alias)
+# =====================================================
+# Definition:
+# import module as alias
+#
+# Why it matters:
+# - Shorter names
+# - Improves readability
+#
+# Real-time examples:
+# import numpy as np
+# import pandas as pd
+# =====================================================
+
+import my_module as mm
+
+print(mm.find_index(courses, "Physics"))  # Output: 2
+
+
+# =====================================================
+# TOPIC 4: from module import specific items
+# =====================================================
+# Definition:
+# Import ONLY what you need from a module
+#
+# Why it matters:
+# - Cleaner namespace
+# - Easier debugging
+# =====================================================
+
+from my_module import find_index, test
+
+print(find_index(courses, "CompSci"))  # Output: 3
+print(test)                            # Output: Test String
+
+
+# =====================================================
+# TOPIC 5: Why NOT to use import *
+# =====================================================
+# from my_module import *
+#
+# Problems:
+# - You don’t know where names came from
+# - Debugging becomes hard
+# - Can overwrite existing variables
+#
+# Rule:
+# ❌ Avoid in real projects
+# =====================================================
+
+
+# =====================================================
+# TOPIC 6: How Python Finds Modules (sys.path)
+# =====================================================
+# Definition:
+# sys.path is a list of directories Python searches for modules
+#
+# Search order:
+# 1. Current script directory
+# 2. PYTHONPATH environment variable
+# 3. Standard Library
+# 4. site-packages (installed libraries)
+#
+# Why it matters:
+# - Explains "ModuleNotFoundError"
+# - Critical for multi-file projects
+# =====================================================
+
+import sys
+
+print(sys.path)   # Shows search locations
+
+
+# =====================================================
+# TOPIC 7: Standard Library (Real Tools)
+# =====================================================
+# Definition:
+# Standard library = built-in modules shipped with Python
+#
+# Why it matters:
+# - No installation required
+# - Secure and optimized
+# - Used in production everywhere
+# =====================================================
+
+# ---------- random ----------
+import random
+print(random.choice(courses))  # Random item from list
+
+
+# ---------- math ----------
 import math
-# math → built-in module for mathematical operations
-print(math.sqrt(16))          # sqrt() → square root
-
-from math import sqrt
-# selective import
-print(sqrt(25))
-
-import random as rnd
-# alias import
-print(rnd.randint(1, 10))     # random integer
+radians = math.radians(90)
+print(radians)                 # 1.5707...
+print(math.sin(radians))       # 1.0
 
 
-# -----------------------------------------------------
-# Phase 2 — Custom Module (utils.py)
-# -----------------------------------------------------
-# utils.py must exist in same folder and contain:
-# def banner():
-# def add(a, b):
-
-import utils
-
-utils.banner()
-print(utils.add(5, 7))
+# ---------- datetime ----------
+from datetime import date
+print(date.today())            # Today's date
 
 
-# -----------------------------------------------------
-# Phase 3 — __name__ == "__main__"
-# -----------------------------------------------------
-# __name__ → built-in variable
-# "__main__" → entry point identifier
+# ---------- calendar ----------
+import calendar
+print(calendar.isleap(2020))   # True
+print(calendar.isleap(2017))   # False
 
-def demo_main():
-    print("Main Logic Running")
+
+# ---------- os ----------
+import os
+print(os.getcwd())             # Current working directory
+
+
+# =====================================================
+# TOPIC 8: __name__ == "__main__"
+# =====================================================
+# Definition:
+# Prevents code from running automatically on import
+#
+# Why it matters:
+# - Safe imports
+# - Required for real applications
+# =====================================================
+
+def main():
+    print("Main program running")
 
 if __name__ == "__main__":
-    demo_main()
+    main()
 
-
-# -----------------------------------------------------
-# Phase 4 — sys Module (CLI control)
-# -----------------------------------------------------
-import sys
-# sys.argv → command-line arguments
-# argv[0] → script name
-# argv[1:] → user input (always strings)
-
-print("CLI arguments:", sys.argv)
 
 
 # =====================================================
-# TASK 1 — CLI TOOL (Addition using utils)
+# FINAL SUMMARY — Day 09
 # =====================================================
-# Requirements:
-# - Use sys.argv
-# - Take 2 numbers from CLI
-# - Use utils.add()
-# - Fail safely
-
-if len(sys.argv) == 3:
-    try:
-        num1 = float(sys.argv[1])
-        num2 = float(sys.argv[2])
-        result = utils.add(num1, num2)
-        print("TASK 1 RESULT (sum):", result)
-    except ValueError:
-        print("TASK 1 ERROR: Numbers required")
-else:
-    print("TASK 1 USAGE: python file.py <num1> <num2>")
-
-
-# -----------------------------------------------------
-# Phase 5 — os Module (OS interaction)
-# -----------------------------------------------------
-import os
-# os → operating system interface
-
-print("Current directory:", os.getcwd())
-print("Directory contents:", os.listdir())
-
-
-# =====================================================
-# TASK 2 — FILE CHECK TOOL
-# =====================================================
-# Requirements:
-# - Take filename from CLI
-# - Check existence
-# - Identify file or directory
-# - Exit safely
-
-if len(sys.argv) >= 2:
-    filename = sys.argv[1]
-
-    if os.path.exists(filename):
-        print(f"TASK 2: '{filename}' exists")
-
-        if os.path.isfile(filename):
-            print("It is a file")
-        elif os.path.isdir(filename):
-            print("It is a directory")
-    else:
-        print(f"TASK 2: '{filename}' does NOT exist")
-else:
-    print("TASK 2 USAGE: python file.py <filename>")
-
-
-# =====================================================
-# Day 9 Summary — New Keywords & Concepts
-# =====================================================
+# module             → reusable file
 # import             → load module
-# from               → selective import
-# as                 → alias
-# module             → reusable .py file
-# __name__           → built-in variable
-# "__main__"         → entry-point identifier
-# sys                → system interaction
-# sys.argv           → CLI arguments
+# import as          → alias
+# from x import y    → selective import
+# sys.path           → module search path
+# standard library   → built-in tools
+# __name__ check     → safe execution
 # os                 → OS interaction
-# os.getcwd()        → current directory
-# os.listdir()       → list directory contents
-# os.path.exists()   → existence check
-# os.path.isfile()   → file check
-# os.path.isdir()    → directory check
 #
-# SECURITY NOTES:
-# - CLI input is untrusted
-# - Always validate arguments
-# - Never auto-execute imported modules
-# - Structure prevents bugs and misuse
+# INDUSTRY TRUTH:
+# - Bad imports cause bugs
+# - Structure = security
+# - Clean modules scale
 # =====================================================
