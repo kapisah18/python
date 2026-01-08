@@ -1,6 +1,6 @@
 """
 ========================================================
-DAY 7 — CONDITIONALS & BOOLEANS IN PYTHON (CODE + NOTES)
+DAY 2 — CONDITIONALS & BOOLEANS IN PYTHON (CODE + NOTES)
 ========================================================
 
 Conditionals control which code runs based on
